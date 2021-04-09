@@ -12,6 +12,6 @@ app.get("/api/health-sites", (req, res) => {
   res.json(healthSites);
 })
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`App on port ${PORT}`)
 })
