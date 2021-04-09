@@ -14,9 +14,8 @@ async function getHealthSites() {
   let data;
 
   try {
-    const res = await fetch("http://localhost:3000/api/health-sites");
+    const res = await fetch("http://localhost:8080/api/health-sites");
     data = await res.json();
-    console.log(data)
   } catch (e) {
     console.log(e)
   }
@@ -34,7 +33,6 @@ const geojsonMarkerOptions = {
 }
 
 getHealthSites().then(featureCollection => {
-  console.log(featureCollection);
   L.geoJSON(featureCollection, {
     pointToLayer: (feature, latlng) => L.circleMarker(latlng, geojsonMarkerOptions),
     onEachFeature,
