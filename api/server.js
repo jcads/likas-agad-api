@@ -1,27 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 
-const healthSites = require("./res/geojson-data/health-sites.json");
-
-healthSites.features = healthSites.features.map(feat => {
-  const properties = {
-    amenity: feat.properties.amenity,
-    addr_street: feat.properties.addr_street,
-    addr_city: feat.properties.addr_city,
-    name: feat.properties.name,
-  }
-
-  return {
-    type: feat.type,
-    geometry: feat.geometry,
-    properties, 
-  }
-})
+const healthSites = require("./res/geojson-data/simple-health-sites.json");
 
 const app = express();
+app.use(cors());
+
 const PORT = 3000;
 
 app.get("/api/health-sites", (req, res) => {
-  console.log(healthSites)
   res.json(healthSites);
 })
 
