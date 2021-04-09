@@ -24,15 +24,7 @@ async function getHealthSites() {
   return data;
 }
 
-var polygon = L.polygon([
-[120.4571767859307,15.806093485596534],
-  [120.45738323220581,15.806116452011224],
-  [120.45741675981856,15.805837753730714],
-  [120.45721022972435,15.805814787316024],
-  [120.4571767859307,15.806093485596534]
-]).addTo(map);
-
-var geojsonMarkerOptions = {
+const geojsonMarkerOptions = {
     radius: 8,
     fillColor: "#ff7800",
     color: "#000",
@@ -41,18 +33,18 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 }
 
-function onEachFeature(feature, layer) {
-  // does this feature have a property named popupContent?
-  if (feature.properties && feature.properties.popupContent) {
-    layer.bindPopup(feature.properties.popupContent);
-  }
-}
-
 getHealthSites().then(featureCollection => {
+  console.log(featureCollection);
   L.geoJSON(featureCollection, {
     pointToLayer: (feature, latlng) => L.circleMarker(latlng, geojsonMarkerOptions),
     onEachFeature,
   }).addTo(map);
 });
 
+function onEachFeature(feature, layer) {
+  // does this feature have a property named popupContent?
+  if (feature.properties && feature.properties.popupContent) {
+    layer.bindPopup(feature.properties.popupContent);
+  }
+}
 

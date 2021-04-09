@@ -6,7 +6,7 @@ const healthSites = require("./res/geojson-data/simple-health-sites.json");
 const app = express();
 app.use(cors());
 
-const PORT = 3000;
+const PORT = 8080;
 
 app.get("/api/health-sites", (req, res) => {
   res.json(healthSites);
